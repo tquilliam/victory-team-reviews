@@ -43,7 +43,7 @@
     --gold: #d4a017;
     --silver: #9aa0a6;
     --bronze3: #b3703a;
-    --radius: 6px;
+    --radius: 4px;
   }
   * { box-sizing: border-box; }
   body {
@@ -53,19 +53,17 @@
   }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px 72px; }
 
-  header.top { background: var(--green); color: #fff; }
-  .top-inner { max-width: 1080px; margin: 0 auto; padding: 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  header.top { background: #fff; color: var(--ink); border-bottom: 1px solid var(--line); }
+  .top-inner { max-width: 1080px; margin: 0 auto; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   .brand { display: flex; align-items: center; gap: 14px; }
-  .wordmark { font-family: "Cormorant Garamond", Georgia, serif; font-size: 30px; letter-spacing: 3px; line-height: 1; text-transform: uppercase; color: #fff; border-bottom: 3px solid var(--red); padding-bottom: 3px; }
-  .brand small { display: block; font-size: 12px; letter-spacing: 2px; color: var(--tan); text-transform: uppercase; margin-top: 6px; }
-  .subtitle { font-size: 14px; color: rgba(255,255,255,.82); }
-  .top a.sheet { display: inline-flex; align-items: center; gap: 7px; color: #fff; text-decoration: none; border: 1px solid rgba(255,255,255,.35); padding: 8px 14px; border-radius: var(--radius); font-size: 13px; }
-  .top a.sheet:hover { background: rgba(255,255,255,.12); }
+  .wordmark { font-family: "Cormorant Garamond", Georgia, serif; font-size: 30px; letter-spacing: 3px; line-height: 1; text-transform: uppercase; color: var(--green); border-bottom: 3px solid var(--red); padding-bottom: 3px; }
+  .brand small { display: block; font-size: 12px; letter-spacing: 2px; color: var(--bronze); text-transform: uppercase; margin-top: 5px; }
+  .subtitle { font-size: 14px; color: var(--muted); }
 
   /* role toggle */
   .toggle { display: inline-flex; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 4px; margin: 26px 0 4px; }
   .toggle button { font: inherit; font-weight: 600; border: 0; background: transparent; color: var(--muted); padding: 9px 22px; border-radius: 999px; cursor: pointer; }
-  .toggle button.on { background: var(--green); color: #fff; }
+  .toggle button.on { background: var(--red); color: #fff; }
 
   .section-label { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin: 30px 0 12px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .section-label select { font: inherit; font-size: 13px; padding: 6px 10px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; color: var(--ink); }
