@@ -4,85 +4,92 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow" />
-<title>Wynstan — Team 5-Star Board</title>
+<title>Victory Blinds — Team 5-Star Board</title>
 
 <!--
   ============================================================================
   REPS & INSTALLERS BOARD  (staff-facing — 5-star wins only)
   ----------------------------------------------------------------------------
-  Reads the SAME published CSVs as the main Wynstan reviews dashboard:
+  Reads the SAME published CSVs as the main reviews dashboard:
     - "All Reviews" tab CSV  -> CONFIG.csvUrl   (filtered to 5-star here)
     - "Staff" tab CSV        -> CONFIG.staffCsvUrl  (Name, Role -> rep/installer)
   Nothing below 5 stars is ever shown. Crediting uses the "Staff (manual)"
-  override, falling back to the auto "Staff Mentioned" guess.
+  override, falling back to the auto "Staff Mentioned" guess — same rule as
+  the main dashboard.
+
+  Deploy: commit this file, GitHub Pages (or any static host). Keep the link
+  internal — a published CSV is viewable by anyone with the link.
   ============================================================================
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --red: #da487e;          /* Wynstan pink */
-    --red-dark: #a7144c;     /* Wynstan deep berry */
-    --dark: #27251f;         /* charcoal */
-    --ink: #27251f;
-    --muted: #736c67;
-    --line: #e8e6e5;
-    --soft: #f4efec;
+    --green: #063B32;        /* Victory deep green */
+    --green-soft: #0d5346;
+    --red: #EB0242;          /* Victory crimson */
+    --red-dark: #A3042F;
+    --tan: #C9BEA4;
+    --tan-soft: #f2eee5;
+    --bronze: #867650;
+    --ink: #393F47;
+    --muted: #6f6a63;
+    --line: #e6e3dc;
     --card: #ffffff;
-    --page: #f7f5f5;
-    --good: #16a34a;
-    --star: #f5a623;
+    --page: #f9f6f2;
+    --good: #199e70;
+    --star: #d99a00;
     --gold: #d4a017;
     --silver: #9aa0a6;
     --bronze3: #b3703a;
-    --radius: 12px;
+    --radius: 4px;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--page); color: var(--ink);
-    font-family: "Roboto", system-ui, -apple-system, Arial, sans-serif;
+    font-family: "Figtree", system-ui, -apple-system, Arial, sans-serif;
     font-size: 15px; line-height: 1.5;
   }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px 72px; }
 
-  header.top { background: var(--dark); color: #fff; }
-  .top-inner { max-width: 1080px; margin: 0 auto; padding: 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  header.top { background: #fff; color: var(--ink); border-bottom: 1px solid var(--line); }
+  .top-inner { max-width: 1080px; margin: 0 auto; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   .brand { display: flex; align-items: center; gap: 14px; }
-  .wordmark { font-weight: 900; font-size: 28px; letter-spacing: 1px; line-height: 1; text-transform: uppercase; }
-  .wordmark span { color: var(--red); }
-  .brand small { display: block; font-size: 12px; letter-spacing: 2px; color: #cfc9c4; text-transform: uppercase; margin-top: 6px; }
-  .subtitle { font-size: 14px; color: rgba(255,255,255,.82); }
-  .top a.sheet { display: inline-flex; align-items: center; gap: 7px; color: #fff; text-decoration: none; border: 1px solid rgba(255,255,255,.35); padding: 8px 14px; border-radius: var(--radius); font-size: 13px; }
-  .top a.sheet:hover { background: rgba(255,255,255,.1); }
+  .wordmark { font-family: "Cormorant Garamond", Georgia, serif; font-size: 30px; letter-spacing: 3px; line-height: 1; text-transform: uppercase; color: var(--green); border-bottom: 3px solid var(--red); padding-bottom: 3px; }
+  .brand small { display: block; font-size: 12px; letter-spacing: 2px; color: var(--bronze); text-transform: uppercase; margin-top: 5px; }
+  .subtitle { font-size: 14px; color: var(--muted); }
 
+  /* role toggle */
   .toggle { display: inline-flex; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 4px; margin: 26px 0 4px; }
-  .toggle button { font: inherit; font-weight: 700; border: 0; background: transparent; color: var(--muted); padding: 9px 22px; border-radius: 999px; cursor: pointer; }
+  .toggle button { font: inherit; font-weight: 600; border: 0; background: transparent; color: var(--muted); padding: 9px 22px; border-radius: 999px; cursor: pointer; }
   .toggle button.on { background: var(--red); color: #fff; }
 
   .section-label { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin: 30px 0 12px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .section-label select { font: inherit; font-size: 13px; padding: 6px 10px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; color: var(--ink); }
   .section-label .spacer { flex: 1; }
 
+  /* podium */
   .podium { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 14px; align-items: end; margin-bottom: 8px; }
   @media (max-width: 620px) { .podium { grid-template-columns: 1fr; } }
   .pod { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 14px; text-align: center; position: relative; }
   .pod.p1 { border-color: var(--gold); box-shadow: 0 6px 22px rgba(212,160,23,.18); }
   .pod .medal { font-size: 30px; line-height: 1; }
-  .pod .pname { font-weight: 700; margin-top: 8px; font-size: 15.5px; }
-  .pod .pcount { font-size: 34px; font-weight: 900; color: var(--dark); margin-top: 4px; }
-  .pod .pcount small { font-size: 13px; color: var(--muted); font-weight: 400; }
+  .pod .pname { font-weight: 600; margin-top: 8px; font-size: 15.5px; }
+  .pod .pcount { font-size: 34px; font-weight: 700; color: var(--green); margin-top: 4px; font-family: "Cormorant Garamond", Georgia, serif; }
+  .pod .pcount small { font-size: 13px; color: var(--muted); font-weight: 400; font-family: "Figtree", sans-serif; }
   .pod.p1 .pcount { color: var(--gold); }
   @media (min-width: 621px) { .pod.p1 { transform: translateY(-10px); } }
 
+  /* ranked list */
   .board { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
   .lrow { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
   .lrow:last-child { border-bottom: 0; }
   .lrow .rk { width: 26px; text-align: center; font-weight: 700; color: var(--muted); }
   .lrow .lname { flex: 1; font-weight: 500; }
-  .lrow .bar { width: 40%; max-width: 240px; height: 8px; background: var(--soft); border-radius: 6px; overflow: hidden; }
-  .lrow .bar span { display: block; height: 100%; background: var(--red); }
-  .lrow .lc { width: 74px; text-align: right; font-weight: 700; color: var(--red-dark); }
+  .lrow .bar { width: 40%; max-width: 240px; height: 8px; background: var(--tan-soft); border-radius: 6px; overflow: hidden; }
+  .lrow .bar span { display: block; height: 100%; background: var(--green); }
+  .lrow .lc { width: 74px; text-align: right; font-weight: 700; color: var(--green); }
   .lrow .lc small { font-weight: 400; color: var(--muted); font-size: 12px; }
   .empty { padding: 26px 16px; text-align: center; color: var(--muted); }
 
@@ -92,21 +99,21 @@
 
   .review { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 12px; }
   .review .meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
-  .badge { font-size: 11px; padding: 3px 9px; border-radius: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; }
+  .badge { font-size: 11px; padding: 3px 9px; border-radius: 3px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; }
   .b-google { background: #e6f1fb; color: #0c447c; }
   .b-trustpilot { background: #e1f5ee; color: #0f6e56; }
   .b-productreview { background: #fadfd4; color: #8a3316; }
-  .b-showroom { background: var(--soft); color: var(--dark); }
   .stars { color: var(--star); font-size: 13px; letter-spacing: 1px; }
   .review .who { font-size: 13px; color: var(--muted); }
-  .review .staff { margin-left: auto; font-size: 12.5px; color: var(--good); display: inline-flex; align-items: center; gap: 5px; font-weight: 700; }
+  .review .staff { margin-left: auto; font-size: 12.5px; color: var(--good); display: inline-flex; align-items: center; gap: 5px; font-weight: 600; }
   .review .body { font-size: 14.5px; line-height: 1.55; }
-  .review .body.t { font-weight: 700; }
+  .review .body.t { font-weight: 600; }
 
   .muted { color: var(--muted); }
   .loading { text-align: center; padding: 64px 0; color: var(--muted); }
-  a.rev-link { color: var(--red-dark); text-decoration: none; font-size: 12.5px; }
+  a.rev-link { color: var(--red); text-decoration: none; font-size: 12.5px; }
   .foot { margin-top: 40px; font-size: 12.5px; color: var(--muted); text-align: center; }
+  .kbig { font-family: "Cormorant Garamond", Georgia, serif; font-size: 15px; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -115,8 +122,8 @@
   <div class="top-inner">
     <div class="brand">
       <div>
-        <div class="wordmark">WYN<span>STAN</span></div>
-        <small>Blinds · Curtains · Shutters · Awnings · Crimsafe</small>
+        <div class="wordmark">Victory</div>
+        <small>Curtains and Blinds</small>
       </div>
       <div class="subtitle">Team 5-Star Board</div>
     </div>
@@ -133,9 +140,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script>
 const CONFIG = {
-  // Same published tabs as the main Wynstan dashboard.
-  csvUrl:      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-1uGKZHQmLB4UysFIsWfpuiX9bdmu8av6_vw1L-bDt_hpoQICZ4nndrsLD8QktgMLEsY63b7uNsKz/pub?gid=2022928861&single=true&output=csv',
-  staffCsvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-1uGKZHQmLB4UysFIsWfpuiX9bdmu8av6_vw1L-bDt_hpoQICZ4nndrsLD8QktgMLEsY63b7uNsKz/pub?gid=1672934192&single=true&output=csv',
+  // Same published tabs as the main Victory dashboard.
+  csvUrl:      'https://docs.google.com/spreadsheets/d/e/2PACX-1vRnxRyeiA020m3iiOWJV_NDM9x-shidyF33HawvXMBDEufDjxZfvp-vsJiSjwlnpQlRfxSJEc_2ATab/pub?gid=662554992&single=true&output=csv',
+  staffCsvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRnxRyeiA020m3iiOWJV_NDM9x-shidyF33HawvXMBDEufDjxZfvp-vsJiSjwlnpQlRfxSJEc_2ATab/pub?gid=63709709&single=true&output=csv',
 };
 
 const $  = (sel, el = document) => el.querySelector(sel);
@@ -148,16 +155,19 @@ const dateVal  = (d) => { const t = new Date(d).getTime(); return isNaN(t) ? 0 :
 const stars = () => '★★★★★';
 const splitNames = (s) => String(s == null ? '' : s).split(',').map((x) => x.trim()).filter(Boolean);
 const NONE_TAGS = new Set(['none', 'no one', 'noone', 'nobody', 'n/a', 'na', '-', 'x']);
+// manual box OVERRIDES the auto guess: blank->keep auto, name(s)->replace, "none"->clear.
 const staffUnion = (r) => {
   const man = splitNames(r['Staff (manual)']);
   if (man.length) { if (man.length === 1 && NONE_TAGS.has(man[0].toLowerCase())) return []; return [...new Set(man)]; }
   return [...new Set(splitNames(r['Staff Mentioned']))];
 };
-const ROLE = {};   // name -> raw role string (from Staff CSV) — source of truth for Wynstan
-const roleOf = (n) => { const r = ROLE[n]; return /install/i.test(r || '') ? 'installer' : 'rep'; };
+// fallback installer set if the Staff CSV can't be read
+const INSTALLERS = new Set(['Mick (Adelaide)', 'Richie Currie', 'James Shaw', 'Sunil Navath', 'Mark Upton', 'Anthony Charles', 'Mick Delia', 'Mark Raybould', 'Jordan Amato', 'Samuel Collins', 'Ian Lloyd', 'Steve Ellis', 'Ash Turner', 'Blerim Ibraimovski', 'Glen Williamson', 'Hakan Seker', 'Jack Callanan', 'Jaechung Kim', 'Matthew Ribaux', 'Pascal Zandbergen', 'Tate Volitakis', 'Zach Brownlie', 'Justin Underwood']);
+const ROLE = {};   // name -> raw role string (from Staff CSV)
+const roleOf = (n) => { const r = ROLE[n]; if (r) return /install/i.test(r) ? 'installer' : 'rep'; return INSTALLERS.has(n) ? 'installer' : 'rep'; };
 const ROLE_LABEL = { rep: 'Sales Reps', installer: 'Installers' };
 
-let FIVE = [];
+let FIVE = [];               // 5-star reviews only
 let STATE = { role: 'rep', month: '', year: '' };
 
 function boot() {
@@ -182,6 +192,7 @@ function boot() {
   } else { go(); }
 }
 
+// leaderboard: [{name, count}] for a role, over reviews passing filterFn
 function leaderboard(role, filterFn) {
   const tally = {};
   FIVE.forEach((r) => {
@@ -228,11 +239,11 @@ function render() {
       <select id="fRole"><option value="">Reps &amp; installers</option><option value="rep">Sales reps</option><option value="installer">Installers</option></select>
       <select id="fPerson"><option value="">Anyone</option></select>
       <select id="fMonth"><option value="">All months</option>${months.map((m) => `<option value="${m}">${monLabel(m)}</option>`).join('')}</select>
-      <input id="fSearch" type="text" placeholder="Search reviews, a name or showroom" />
+      <input id="fSearch" type="text" placeholder="Search reviews or a name" />
     </div>
     <div id="feed"></div>
 
-    <div class="foot">Wynstan — team 5-star board · Google, Trustpilot &amp; ProductReview.com.au<br>
+    <div class="foot">Victory Curtains and Blinds — team 5-star board · Google, Trustpilot &amp; ProductReview.com.au<br>
       <span class="muted">Only 5-star reviews are shown. Credit follows the sheet's manual tag, then the auto name-match.</span></div>
   `;
 
@@ -271,6 +282,7 @@ function renderYearBoard() {
 const MEDALS = ['🥇', '🥈', '🥉'];
 function podiumHtml(top) {
   if (!top.length) return emptyBoard();
+  // display order: 2nd, 1st, 3rd
   const order = [top[1], top[0], top[2]];
   const cls = ['p2', 'p1', 'p3'];
   const medalIdx = [1, 0, 2];
@@ -310,7 +322,7 @@ function renderFeed() {
   if (role)   rows = rows.filter((r) => r._staff.some((n) => roleOf(n) === role));
   if (person) rows = rows.filter((r) => r._staff.includes(person));
   if (mon)    rows = rows.filter((r) => monthKey(r.Date) === mon);
-  if (q)      rows = rows.filter((r) => ((r.Review || '') + ' ' + (r.Title || '') + ' ' + r._staff.join(' ') + ' ' + (r.Author || '') + ' ' + (r.Showroom || '')).toLowerCase().includes(q));
+  if (q)      rows = rows.filter((r) => ((r.Review || '') + ' ' + (r.Title || '') + ' ' + r._staff.join(' ') + ' ' + (r.Author || '')).toLowerCase().includes(q));
 
   const shown = rows.slice(0, 60);
   const bClass = (s) => 'b-' + String(s || '').toLowerCase().replace(/[^a-z]/g, '');
@@ -320,7 +332,6 @@ function renderFeed() {
     return `<div class="review">
       <div class="meta">
         <span class="badge ${bClass(r.Source)}">${esc(r.Source)}</span>
-        ${r.Showroom ? `<span class="badge b-showroom">${esc(r.Showroom)}</span>` : ''}
         <span class="stars">${stars()}</span>
         <span class="who">${esc(r.Author || 'Anonymous')}${when ? ' · ' + when : ''}</span>
         ${flagged ? `<span class="staff">◆ ${esc(flagged)}</span>` : ''}
